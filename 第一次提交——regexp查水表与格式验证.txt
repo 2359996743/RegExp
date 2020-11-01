@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<link>
+<link lang="en">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="../css/bootstrap.css" />
+<script src="../js/jquery.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 练习：RegExp对象 （正则表达式对象）
+        1。注册密码强度的验证：
+        请用户输入密码，要求;
+        字母，数字组成。至少包含以为数字和一位大写字母 -->
+        <!-- <script>
+            var pwd = prompt('请输入密码');
+            // 创建验证密码强度的正则表达式对象
+            var reg = /^(?![A-Za-z]+$)(?![a-z0-9]+$)[0-9A-Za-z]{8,}$/;
+            //用正则表达式来验证用户输入的密码是否符合密码强度的要求 
+            var bool = reg.test(pwd);
+            // 如果验证的结果符合密码强度的要求，就在页面中显示：密码强度高
+            if (bool) {
+                document.write("<h1 style='color: green;font-size: 24px'>密码强度高!</h1>");
+            } else {
+                //   如果验证的结果不符合密码强度的要求，就在页面中显示：密码强度不足
+                document.write("<h1 style='color: red;font-size: 24px'>密码强度不足!</h1>");
+            }
+        </script> -->
+        <!-- 练习：RegExp对象  -->
+        <!-- 练习1：获取一段html文本中的所有超链接的href属性的值
+        <div id="content">
+            <a href="www.baidu.com" target="_blank">1</a>
+            <a href="www.bootcss.com">2</a>
+            <a href="tedu.cn">3</a>
+        </div>
+        <script>
+            // 解题思路：先获取#content这个div标签对象，用dom的方法获取div对象，然后再用对象.innerHTML获取div中的内容，也就是所有的a标签，创建RegExp对象，对象中的正则表达式的规则是匹配所有a标签，这样就能对所有匹配的a标签就行数据的处理了
+            var html = content.innerHTML;
+            // console.log(arr);
+            // 创建可以匹配所有a标签的RegExp对象
+            var reg = /<a href="(.*?)">(.*?)<\/a>/ig;
+            //                   组1    组2
+            //用循环反复调用reg对象的exec()方法，查找每个a（包括a的内容和位置）
+            do {//想尝试查找一次a标签
+                var arr = reg.exec(html);
+                // 如果找到a标签就返回一个数组，这个数组当中包含这次找到a的内容
+                if (arr != null) {
+                    console.log(arr[1]);
+                }
+            } while (arr != null);//只要本次找到了a标签证明arr不为null就可以永远执行do中的循环体：继续查找a标签
+        </script> -->
+
+        <!-- 练习3： 查找用户输入中的敏感词敏感词包括：公安，公共安全，输出所有关键字的位置和内容
+        <script>
+            var str = "公安负责维护公共安全秩序";
+            // 创建正则表达式RegExp对象
+            var reg = /公安|公共安全/g;
+            do {
+                var arr = reg.exec(str);
+                if (arr != null) {
+                    console.log("在" + arr.index + "的位置发现关键词：" + arr[0]);
+                }
+            } while (arr != null);
+        </script> -->
+        <!-- 文本两端对齐响应式 -->
+
+        <!-- js-正则表达式-指定位置的匹配
+        ^ 匹配字符串的开头
+        $ 匹配字符串的结尾
+        \b匹配单词的边界处
+        \B匹配单词的非边界处
+        ?=not 判断 如果有紧挨着的not则进行匹配 匹配其后紧挨着的not的字符串
+        ?!=not 判断如果紧挨着的不是not则进行匹配 匹配其后没有紧挨着的not的字符串 -->
+
+        <!-- 定义正则表达式的练习题 
+        1.定义可以匹配手机号码的正则表达式
+        规则：(\+86|\+0086)?\s*1[3-9]\d{9}
+        2.定义可以匹配身份证号码的正则表达式
+        一代身份证号码的正则表达式规则：\d{15}(\d{2}[0-9x])?
+        3.定义可以匹配中文姓名的正则表达式
+        规则：[\u4e00-\u9fa5]{2,}
+        4.定义匹配邮箱的正则表达式
+        规则：\w+@\w+\.\w+
+        \w+@\w+\.[0-9a-z]+
+        5.定义可以匹配html标签的正则表达式
+        双标签规则：<[0-9A-Za-z]+>.*</[0-9A-Za-z]+>
+        但标签规则：<.+>
+            6.如下密码强度要求：8位以上，字母数字的组合，至少一位大写字母和一位数字
+            规则分析：从开头到结尾，这八位字母不能都是字母（包含了大写和小写）
+            从开头到结尾，这八位字母不能是小写字母和数字
+            只能是八位以上的数字和字母的组合
+            ^(?![A-Za-z]+$)(?![0-9a-z]+$)[0-9A-Za-z]{8,}$-->
+        <!-- 用于模式匹配的String方法。模式匹配在字符串中的重要应用就是查找敏感词/关键字。
+        如何查找一个固定的敏感词所出现的位置str.indexOf('固定的敏感词/关键字',starti);
+        var i = str.indexOf('固定的敏感词/关键字',starti); 
+        使用indexOf函数的确定就是它只能查找固定的一个关键词，不能防住关键词的变种(不能够查找敏感词的变种)，比较 low
+        <script>
+            //请用户输入消息内容
+            var msg = prompt('请用户输入');
+            // 对用户输入的消息内容进行敏感词的查找：我草
+            var i = msg.indexOf('我草');
+            if (i != -1) {
+                //对查找的结果进行判断。如果查到了敏感词就提示包含敏感词，禁止发送
+                document.write('<h1 style="color: yellowgreen;font-size: 36px">包含敏感词，禁止发送</h1>');
+            } else {
+                //如果没有查到敏感词，就显示xxx说：消息内容
+                document.write("<h1 style='color:red;font-size: 36px'>西姐说：" + msg + "</h1>");
+            </script>
+            }-->
+        <!-- 练习： 定义一个规则中同时匹配“我草”、“我艹”、“我操”这三种敏感词 
+        <script>
+            //定义查找敏感正则表达式的规则
+            var str = '我草，你家真大。另一个人也说，我操，真大呀！';
+            var reg = /我[草艹操]/g;
+            //循环查找全部敏感词
+            do {//先查找一个敏感词
+                var arr = reg.exec(str);
+                if (arr != null) {
+                    console.log("在" + arr.index + "位置查到敏感词：" + arr[0]);
+                }
+            } while (arr != null);//查到了一个敏感词之后，就继续循环查找敏感词
+        </script>-->
+
+        <!-- 复习：String字符串中的所提供的正则表达式的函数
+        查看敏感词所在位置的函数有两个：indexOf('固定敏感词',formi); / search(正则表达式); -->
+        <!-- 用indexOf函数查看一个固定敏感词所出现的位置
+        <script>
+            //请用户输入内容
+            var data = prompt("请输入内容");
+            //对用户输入的内容进行敏感词的查找：我操
+            var res = data.search(/([我喔I]|wo)\s*([艹操草]|cao)/i);
+            if (res >= 0) {// 如果出现敏感吃返回的结果是：敏感词第一个子在所查询字符串中的位置下标,则显示：包含敏感词data，禁止发送
+                document.write(`<h2 style="color:green;font-size: 26px">包含敏感词:${data}禁止发送</h2>`);
+            } else {//没有出现敏感词则显示：西姐说：data
+                document.write(`<h2 style="color:green;font-size: 26px">西姐说:${data}</h2>`);
+            }
+        </script> -->
+        <!-- match函数查找关键词 
+        <script>
+            var str = "老是说：用小红，我的，朋友造句。小明：小红是我的朋友；小西：嘿朋友，小红是我的！";
+            //查找以小字开头的人名
+            var arr = str.match(/小[\u4e00-\u9fa5]+/i);
+            if (arr != null) {
+                console.log(`在位置${arr.index}处发现第一个敏感词：${arr[0]}`);
+            }
+        </script>-->
+        <!-- match函数查找关键词 加g
+        <script>
+            var str = "老是说：用小红，我的，朋友造句。小明：小红是我的朋友；小西：嘿朋友，小红是我的！";
+            //查找以小字开头的人名
+            var arr = str.match(/小[\u4e00-\u9fa5]/ig);
+            if (arr != null) {
+                console.log(arr);
+            }
+        </script>-->
+        <!-- 替换函数-把str中的带小字的人名换成**
+        <script>
+            var str = "老是说：用小红，我的，朋友造句。小明：小红是我的朋友；小西：嘿朋友，小红是我的！";
+            //查找以小字开头的人名
+            var reg = /小[\u4e00-\u9fa5]/ig;
+            str = str.replace(reg, '**');
+            console.log(str);
+        </script>-->
+        <!-- String中提供的切割函数 
+        <script>
+            var str = 'How Are |You';
+            //使用正则来匹配按照谁来切割的字符
+            var reg = /\s+/;
+            var arr = str.split(reg);
+            console.log(arr);
+        </script>-->
+
+        <!-- 练习：用于匹配模式的String方法 -->
+        <!-- 1.分别定义函数去掉去掉字符串前空字符，去掉字符串后空字符以及同时去掉前后空字符 
+        <script>
+            // 把字符替换成一个空的字符串就是替换掉的意思
+            var str = '   hello     word!!  ';
+            function trimLeft(str) {//去掉左边的空字符
+                return str.replace(/^\s*/, "")
+            }
+            function trimRight(str) {//去掉右边的空字符
+                return str.replace(/\s*$/, "")
+            }
+            function trimboth(str) {//去掉左边和右边的空字符
+                return str.replace(/^\s*|\s*$/g, "")
+                //return str.replace(/^\s*|\s*$/, "") 注意这里有个小坑。这样写只能去掉左面的空字符而不能去掉右面的空字符。原因就是string 中所提供的4种查找敏感词函数和1种替换函数他们都比较懒，一般查找到一个敏感词或替换一个字符串就不再往下执行了，下班了。就以得加上g查找全部
+            }
+            console.log(trimLeft(str)); //返回'hello     word!!  ';
+            console.log(trimRight(str)); //返回'    hello     word!!';
+            console.log(trimboth(str)); //返回'hello     word!!';
+        </script>-->
+        <!-- 2.替换所有敏感词： -->
+        <!-- -关键字包括：纪检、纪检监察、纪委  
+        -请用户输入一段回复内容
+        -检查并替换每个敏感词为**或****
+        -最后显示共替换了多少处。
+        <script>
+            var str = '学校组织纪委来动员学生参加纪检活动，最后评分由纪检监察人员来评定分数';
+            var reg = (/纪检监察|纪检|纪委/g); //匹配所有str中的所有的敏感词
+            str = str.replace(reg, function (keyword) {
+                return keyword.length == 4 ? "****" : "**";
+            });
+            console.log(str);
+        </script>-->
+
+        <!-- 3.格式化身份证号中的生日为：yyyy年MM月dd日 -->
+        <!-- 匹配一代身份证的正则表达式
+        <script>
+            var pid = '220181199909102880';
+            //截取字符串中的生日（出生日期）
+            var birthday = pid.slice(6, 14);//不包含右侧最后一个下标，所以得在原来的基础上加1。14=13+1；
+            // 定义正则匹配生日中的各个部分（用小组来匹配各个部分）
+            var reg = /(\d{4})(\d{2})(\d{2})/;
+            birthday = birthday.replace(reg, "$1年$2月$3日");
+            console.log(birthday);
+        </script> -->
+        <!-- <script>
+            // 用function 关键子声明方式来创建函数
+            function add(a, b) {//函数（）里面的参数默认都是变量，不用再var声明了 
+                let sum = a + b;
+                return sum;//sum局部变量外部访问不了
+            }
+            console.log(add(2, 4));
+            //用直接量的方式来创建函数
+            var add1 = function (a, b) {
+                return a + b;
+            }
+            console.log(add1(5, 5));
+            //用function对象的方式来创建对象
+            var add2 = new Function("a", "b", "return a+b");
+            console.log(add2(9, 0));
+        </script> -->
+        <!-- 练习：创建函数
+        1.实现一个员工数组的排序
+        -2.可以按照工资排序：使用函数直接量定义
+        -3.可以按年龄排序：使用Function对象定义 -->
+        <!-- -1.可以按姓名首字母排序：使用函数声明方式定义 -->
+        <script>
+            var arr = [
+                { ename: "tom", salary: 12000, age: 26 },
+                { ename: "jerry", salary: 17000, age: 29 },
+                { ename: "lina", salary: 21000, age: 34 }
+            ];
+
+            //法一： arr.sort(function (a, b) {//当然这个匿名函数也可以拿到外面写
+            //     return a.ename > b.ename ? 1 : a.ename < b.ename ? -1 : 0;
+
+            // });
+            // console.log(arr.reverse());//翻转数组中的内容 ，让ename首字母从大到小排序  从小-大：jlt  从大-小：tlj
+            // 法二. 用声明函数的方式创建函数
+            // function sortByEname(a, b) {
+            //     return a.ename > b.ename ? 1 : a.ename < b.ename ? -1 : 0;
+            // }
+            // arr.sort(sortByEname);
+            // console.log(arr);
+            //-2.可以按照工资排序：使用函数直接量定义
+            // var sortBySalary = function (a, b) {
+            //     return b.salary - a.salary;//从大到小
+            // }
+            // arr.sort(sortBySalary);
+            // console.log(arr);
+            // -3.可以按年龄排序：使用Function对象定义
+            // var sortByAge = new Function("a", "b", "return a-b");
+            // arr.sort(sortByAge);
+            // console.log(arr);
+        </script>
+    </div>
+</body>
+
+</html>
+

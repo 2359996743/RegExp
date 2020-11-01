@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ul>
+    <li>80</li>
+    <li>90</li>
+    <li>100</li>
+    <li>30</li>
+  </ul>
+  <script>
+    // 1.查找敏感词——js给str家提供的正则相关的函数indexof()
+    // //indexOf()这个函数只能查找一个固定不变的敏感词，不支持正则
+    // let txt = prompt();
+    // let i = txt.indexOf('我操');
+    // console.log(i);
+    // // 如果用户输入的文本中包含敏感词，则页面添加文本提示“包含敏感词XXX，禁止发送”
+    // if(i>=0) {//注意一定要有=0，不然若是敏感词在开头下标为0位置时，就查找不到，允许发送了。或者条件直接写i!=-1
+    //   document.write(`<h3>包含敏感词'${txt.substr(i,2)}'禁止发送 ${i}</h3>`)
+    // }else {
+    //   // 否则可以发送，页面添加文本txt内容
+    //   document.write(`<h3>然哥说：${txt}</h3>`)
+    // }
+
+    // 2.查找敏感词——js给str家提供的正则相关的函数search()——模糊查询
+    //search()这个函数可以查找多种敏感词，支持正则
+    // let txt = prompt();
+    // let i = txt.search(/([我卧窝锅]|w(o)?)\s*([曹艹草操]|c(ao)?)/i);//防止wocao中单个字母大写的情况，添加i修饰，因为正则中是区分大小写的
+    // // 如果用户输入的文本中包含敏感词，则页面添加文本提示“包含敏感词XXX，禁止发送”
+    // if(i>=0) {//注意一定要有=0，不然若是敏感词在开头下标为0位置时，就查找不到，允许发送了。或者条件直接写i!=-1
+    //   document.write(`<h3>包含敏感词,位置在'${txt.charAt(i)}'附近禁止发送 ${i}</h3>`)
+    // }else {
+    //   // 否则可以发送，页面添加文本txt内容
+    //   document.write(`<h3>然哥说：${txt}</h3>`)
+    // }
+
+    // 3.使用js给str家提供的查找敏感词和位置的match()函数，返回一个关联数组（重点**：数组的本质。就是关联数组，js中只有一种数组就是关联数组，这个数组（楼道）里面的内容（房子的门牌号已经规定好了）就是“0”和“index”）需要掌握的两点：1.数组本质 2.鱼和熊掌不可兼得
+    // let txt = prompt();
+    // let arr = txt.match(/([我卧窝锅]|w(o)?)\s*([曹艹草操]|c(ao)?)/ig);
+    // console.log(arr);
+    // if (arr != null) {
+    //   document.write(`<h3>包含敏感词'${arr["0"]}',共有'${arr.length}个敏感词'禁止发送</h3>`)
+    // }else {
+    //   // 否则可以发送，页面添加文本txt内容
+    //   document.write(`<h3>然哥说：${arr["0"]}</h3>`)
+    // }
+
+      // match()函数的练习:用小红，我的，朋友造句。小亮说：小红是我的朋友。然哥说：朋友！小红是我的。
+      // 查找所有以小字开头的敏感词
+      // let str = '用小红，我的，朋友造句。小亮说：小红是我的朋友。然哥说：朋友！小红是我的';
+      // let arr = str.match(/小[\u4e00-\u9fa5]/g);
+      // for (var i = 0; i < arr.length;i++) {
+      //     if(arr != null) {
+      //     document.write(`<h3>包含敏感词：${arr[i]}</h3>`);
+      //   }else {
+      //     document.write(`<h3>不包含敏感词</h3>`);
+      //   }
+      // }
+
+      // 查找：indexOf()/search()/match()
+      //let txt = prompt();
+      // let i = txt.indexOf('我操');//注意indexOf这个函数不支持正则
+      // console.log(i,txt);
+      // if(i!=-1) {
+      //   document.write(`<h5>在位置${i}处发现敏感词，禁止发送</h5>`);
+      // }else {
+      //   document.write(`<h5>${txt}</h5>`);
+      // }
+    //let i =  txt.search(/([我卧窝喔]|w(o)?)\s*([艹草操]|c(ao)?)/);
+    // alert(`在位置${i!=-1?i:0}处发现敏感词`);
+    //alert(i!=-1?`在${i}位置处发现敏感词，禁止发送`:txt);
+    // let arr = txt.match(/([我卧窝喔]|w(o)?)\s*([艹草操]|c(ao)?)/);
+    // alert(arr!=null?`在位置${arr["index"]}发现敏感词：${arr["0"]}`:txt);
+    //let arr = txt.match(/([我卧窝喔]|w(o)?)\s*([艹草操]|c(ao)?)/ig);
+    //alert(arr!=null?`共查找${arr["length"]}处敏感词`:txt);
+    // 替换：repalce()
+    // 普通替换：。只能替换一固定的值
+    //let str = 'you can you up';//str是不可变类型：一旦创建，不可修改，只能覆盖。 数组是可变类型（可以直接修改原数组，但是数组中有四个例外不能直接修改原数组，而是修改副本：concat()/slice()/toString()/join()）
+    //str = str.replace(/\b[a-z]/ig,'$');
+    //console.log(str);
+    // 复杂替换：可以动态的替换内容（替换的内容不是一个相同的写死的值，而是可以不相同的值）
+    // 要实现的效果：将str中的每个单词的首字母变大写，最终的str格式为'You Can You Up'
+    //let i = 0;
+    //str = str.replace(/\b[a-z]/ig,keyword=>{
+     // i++;
+    //   console.log(`调用了${i}次回调函数，找到了${keyword},替换为${keyword.toUpperCase()}`);
+    //   return keyword.toUpperCase(
+    // )});
+    //console.log(str);
+    // 替换的延伸——利用replace（）函数可以替换为''空，可以去掉字符串开头和结尾的多出来的空格
+    // 1.原理和本质：
+      //let str1 = '         zhang            dong          ';
+      // function ltrim(str) {
+      //   return str.replace(/^\s+/,'');
+      // }console.log(ltrim(str1))
+    
+      // function rtrim(str) {
+      //   return str.replace(/\s+$/,'');
+      // }console.log(rtrim(str1));
+
+      // function trim(str) {
+      //   return str.replace(/^\s+|\s+$/g,'');
+      // }console.log(trim(str1));
+      // 2.给字符串去掉开头和结尾的空字符，高版本告别（ES6/ES7）的js中都给封装报了函数，调用就行，但是高版本的js有兼容性问题，一些项目中不适用高版本的情况下，还想要去掉字符串空格，就得自己手动写正则+js
+    // 切割字符串：split()
+    // 普通切割：只能按照特定的符号进行切割
+    // 将str切割成子字符串放到数组中
+    // let arr = str.split(' ');
+    // console.log(arr);//["you", "can", "you", "up"]
+    // 负载切割：不是按照特定的符号进行切割，而是按照特定的规律进行的切割
+    // 例子：将html中ul下li中的内容放到数组中
+    //let ul = document.body.getElementsByTagName('ul')[0];
+    //let str = ul.innerHTML;
+  //   str = str.replace(/^\s*<li>|<\/li>\s*$/ig,'');
+  //  let arr = str.split(/<\/li>\s*<li>/);
+  //  console.log(arr);//["80", "90", "100", "30"]
+   //let arr  = ul.innerHTML.replace(/^\s*<li>|<\/li>\s*$/ig,'').split(/<\/li>\s*<li>/);//替换上述三行代码
+  //  翻转一个字符串
+  // let str = 'helloword';
+  // str = str.split('').reverse().join('');
+  // console.log(str);//drowolleh
+
+  // 动态生成正则表达式——new RegExp('',ig);
+  //  let arr = ['紫烟','晴天','月光'];
+  //  let txt = prompt();
+  // //  将数组按照特殊字符拼接成有正则含义的字符串（按照|拼接成字符串）
+  // // let str = arr.join('|');//'紫烟|晴天|月光'
+  //  let arr1 = txt.match(new RegExp(arr.join('|')));
+  //  alert(arr1!=null?`在位置${arr1.index}处发现敏感词${arr1["0"]}`:txt);
+  //  console.log(str);
+
+// 总练习：解析url字符串中的各个部分内容http://localhost:5500/public/index.html?lid=5#top
+// 两种方法：1.使用字符串切割——麻烦   2.——使用正则表达式(这种方法有小零碎/缺点：会把分组内的分组也单独放一个房间) 3.使用零宽断言（完整的没有零碎）3.使用零宽断言（就是带条件的正则，可以对要匹配的正则的前后进行条件的要求）+match()函数。这种方法与切割是一样的，只不过这个是一刀把想要的东西切开了，而直接切割不能直接切除你想要的，切完只玩还得剔除和拼接
+// 2.使用正则表达式解析url中的各个部分（01-先使用正则匹配出url中的各个部分,把匹配好的正则的各个部分用小括号()分组的方式包裹起来，再用match()函数进行查找——利用match()函数不仅能查找关键词还能把字符串中的每个分组就是小括号包裹的东西单独放到一个房间中）
+  let str = 'http://localhost:5500/public/index.html?lid=5&upwd=12345rrr#top';
+  //2. let reg = /^([a-z]+):\/\/([a-z0-9.]+):(\d+)((\/[a-z.]+)+$)\?(([a-z]+=[0-9a-z]+&?)+$)(#[a-z]+)/;
+  // let arr = str.match(reg);//url中各个部分的分组分别保存在1 2 3 4 6 8号房间
+  // console.log(arr[1],arr[2],arr[3],arr[4],arr[6],arr[8]);
+  // console.log(arr);
+
+  // 3.零宽断言：
+  // let reg = /[a-z]+(?=:\/\/)|(?<=:\/\/)[a-z0-9.]+(?=:)|(?<=:)\d+(?=\/)|\/[a-z.0-9/]+(?=\?)|(?<=\?)[a-z0-9=&]+|#[a-z]+/ig;
+  // let i = 0;
+  // let arr = str.match(reg);
+  // arr.forEach(elem=>console.log(elem));//可以得到数组中每个成员
+  </script>
+</body>
+</html>

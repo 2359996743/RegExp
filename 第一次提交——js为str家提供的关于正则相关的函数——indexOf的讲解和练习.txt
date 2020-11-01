@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="source">
+        <li>100</li>
+        <li>71</li>
+        <li>91</li>
+        <li>81</li>
+    </ul>
+    <script>
+        // 普通替换，实现目标：把小字开头的名字替换为**，并打印出共替换了多少处（得使用match（）函数查找）
+        // let str = '使小红，我的，朋友，第三个词造句。小亮说：‘小红是我的’。然哥说：朋友！，小红是我的';
+        // let arr = str.match(/小[\u4e00-\u9fa5]/g);
+        // str = str.replace(/小[\u4e00-\u9fa5]/g, '**');//str 返回的是替换之后的完整的字符串
+        // alert(`共替换了${arr != null ? arr.length : 0}处敏感词`);
+
+        // replace()练习 -》想把每个单词首字母改为大写
+        // let str = 'you can you up';
+        // // 使用高级替换
+        // var i = 0;
+        // str = str.replace(/\b[a-z]/ig, key => {
+        //     i++;
+        //     //如何学习回调函数的方法：打桩（打印第几次调用回调函数，同时打印出变量）可以推断回调函数的本质
+        //     console.log(`这是第${i}次调用回调函数，key的值为${key},转换后的值为${key.toUpperCase()}`);
+        //     key.toUpperCase()
+        // });
+        // 去掉字符串开头的空字符
+        // let str = '  you can you up  ';
+        // function ltrim(str) {
+        //     return str.replace(/^\s+/, '');
+
+        // } console.log(ltrim())
+        // function rtrim(str) {
+        //     return str.replace(/\s+$/, '');
+        // } console.log(rtrim())
+        //var str = '  you can you up    ';
+        // function b(str) {
+        //     return str.replace(/^\s+|\s+$/g, '');
+        // } console.log(b(str));
+        //上面是自己手动写的给字符串去掉前后空格功能的本质和原理，js高版本ES6/ES7中自动提供了给str去掉前后空格的函数（trimLeft()/trimeRight()/trim()）但是高版本的js存在兼容性问题，将来一个项目中不兼容高版本但又想使用这个函数，那就得自己写了（原理和本质就是使用replace（）替换函数把关键词替换为空字符就行了）
+        // console.log(str.trimLeft());
+        // console.log(str.trimRight());
+        // console.log(str.trim());
+
+        // 切割字符串：将字符串按照指定的字符切割成多段子字符串，放到数组中
+        // 1.普通切割：
+        //获取邮箱中@前后的内容
+        // let email = 'zhangdong@tedu.cn';
+        // let arr = email.split('@');
+        // console.log(arr, arr["0"], arr['1']);
+        //想把一句单词的句子，切割为单词的数组
+        // let str = 'you can you up';
+        // let arr = str.split(' ');
+        // console.log(arr, arr["0"], arr["1"], arr["2"], arr["3"]);
+
+        // 1.普通切割的一个最大用途：让字符串可以不适用call()函数的情况下使用数组家的函数
+        // 笔试题：翻转字符串（原理本质：将字符串打散成子字符串放入数组中，然数组进行翻转最后再拼接回字符串）
+        // let str = 'helloword';
+        // let arr = str.split('');
+        // str = arr.reverse().join('');
+        // console.log(str);
+
+        // 2.负载切割——使用正则来实现
+        // 从页面上提取ul li中的多个内容放入数组中显示
+        // let ul = document.getElementById('source');
+        // let str = ul.innerHTML;
+        // // 1.去空格+掐头去尾
+        // str = str.replace(/^\s*<li>|<\/li>\s*$/ig, '');
+        // let arr = str.split(/<\/li>\s*<li>/);
+        // console.log(str, arr);
+
+        // 创建正则对象：两种方式1.new RegExp('正则',ig);可以根据条件动态的生成正则。小坑：当有\d,\s,\w时，要防止js程序认为\是转义符号的意思：将s进行转移，需要放置js误认转义符，需要变成\\s
+        // 2./正则/它不能动态生成，只能是一个写死的正则。小坑：当有/时要防止正则需要转移成\/
+        // 1.什么时候使用第一种方式创建动态的正则
+        // 例子:假如从服务器端获取了一个包含敏感词的数组(若日后服务器端更改了数组,又新增了多个敏感词,那么前端使用使用第二种创建正则的方式就得修改.而是用第一种方式创建出来的正则,当服务器数据改变时,前端也不用修改正则)
+        // let arr = ['明月', '青天', '香炉', '紫嫣'];
+        // // 将数组arr转换成字符串(因为正则是使用字符串的,可以放js语句,那么就把从数据库中获取到的数据转化成正则字符串中正则的格式(要求转化有两点:1.是字符串 2.是可以匹配的正则规则)),这样才能动态的生成正则表达式
+        // let str = arr.join('|');//明月|青天|香炉
+
+        // console.log(str);
+        // let txt = prompt();
+        // let arr1 = txt.match(new RegExp(str));
+        // if (arr1 != null) {
+        //     document.write(`<h5>在位置${arr1["index"]}处找到敏感词${arr1[0]},禁止发送</h5>`);
+        // } else {
+        //     document.write(`<h5>${txt}</h5>`);
+        // }
+    </script>
+</body>
+
+</html>
