@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 正则对象reg提供的函数——test()验证函数/exec()查找字符串中下一个敏感词的内容和下标
+    // 1.手机号格式的验证
+    // let phone = prompt('请输入手机号');
+    // let bool = /^1[3-9]\d{9}$/.test(phone);
+    // alert(bool?phone:`手机号格式错误！！`);
+
+    // 2.正则对象reg提供的函数——exec()查找所有关键词的内容和位置的函数
+    //let str = '老师说：用小红，我的，朋友造句,小亮说：小红是我的朋友，小然说：朋友！小红是我的！！';
+     //let reg = /小[\u4e00-\u9fa5]/g;//reg.exec()调用一次只能查找出一个符合正则要求的关键词。所以想要查找处所有的关键词的位置和内容的话，必须调用多次reg.exec()函数才能实现,调用多次时必须给正则加上g防止下班的情况，只调用一次时，加不加g不无所谓反正只查找一次
+    // exec()函数使用do-while循环来查找所有（因为无论str中是否含有关键词够要就行一次查找，才能判断是否有必要继续进行之后的查找）
+    // do {
+    //    var arr = reg.exec(str); //这里arr声明不能使用let，因为不能重复声明,let reg = /小[\u4e00-\u9fa5]/g放在do中会造成死循环，因为每次循环都会创建一个新的对象reg对象 reg.lastIndex永远都在第一个敏感词的下标和0之间来回变换，所以会造成死循环
+    //   if(arr != null) {
+    //     console.log(`本次查找到的敏感词是${arr[0]}位置在${arr.index},下次从下标为${reg.lastIndex}的位置开始查找`);
+    //     // console.log(arr);
+    //     } 
+    //   }while(arr != null)
+
+    // 正则提供的函数——exec()狗熊掰棒子,1.这个函数调用一次只能返回出一个敏感词的内容和位置，再次被调用的时候，所查找到的敏感词就会替换掉原来所查找的敏感词的内容和位置。2.若想要输出每次调用exec的变化，不能在最后打印输出，因为最后输出的就是最后一个敏感词的位置和内容。得在每次循环exec调用的时候打印就能看见了
+    // let str = '老师说：用小红。我的，朋友造句，小亮说：小红是我的朋友，小然说：朋友！小红是我的！！';
+    // let reg = /小[\u4e00-\u9fa5]/g;//注意使用exec循环的方式查找敏感词的位置和内容的时候正则中必须要加上g不然会出现死循环（不加g不会自动向后查找，只来回查找第一个符合要求正则的敏感词）
+   
+      // do {
+      //   var arr =  reg.exec(str);
+      //   // console.log(`本次所查找到的敏感词的位置${arr.index},内容为：${arr[0]},下次从位置：${reg.lastIndex}开始查找`)
+      //   console.log(arr); 
+      //}while(arr!=null)
+
+
+      //练习：定义一个函数add，可以计算任意多个整数的和
+      // 重载：做一件事，根据传入的实参值的不同而执行不同的操作
+    //   let add = function () {
+    //   let sum = 0;
+    //   for(let elem of arguments) {
+    //         sum+=elem;
+    //   }
+    //   return sum;
+    // }
+  //  console.log(add(1,2));
+  //  console.log(add(10,20));
+  //  add(15,20);
+  //  add(5,10);
+
+
+  //参数结构（本质也是对象解构——应用于：只传入部分实参值，有要求所传入的实参值与形参值一一对应的时候使用）
+    //   // 例子点餐：
+    // function eat(
+    //   {
+    //     zhushi='汉堡',
+    //     xiaochi='蛋挞',
+    //     yinliao= '奶茶'}
+    //   ){
+    //  return (
+    //     `订餐详情：
+    //       zhushi: ${zhushi},
+    //       xiaochi: ${xiaochi},
+    //       yinliao: ${yinliao},
+    //     `);
+    // }
+
+    // //错误：console.log(eat());
+    // //注意：使用参数结构/对象结构的方式传递替换参数变量并设置默认值一定要在调用函数的同时传递所传入参数的格式相同
+    // console.log(eat({xiaochi:'披萨'}));
+    // console.log(eat({zhushi: '灌汤包'}));
+    // console.log(eat({xiaochi:'臭豆腐',yinliao: 'sprite'}));
+
+    // let fun = (function() {
+    //   let a = 1;
+    //   return a;
+    // })();
+    // console.log(fun);
+
+
+    // 小孩零花钱
+    //   let pay = (function() {
+    //   let totle = 1000;//在妈妈的函数作用域对象中，是局部变量
+    //   return function (money) {
+    //     totle -= money;
+    //     console.log(`花了${money}钱，剩了${totle}钱`);
+    //   }
+    // })();
+    // pay(100);
+    // pay(100);
+    // pay(100);
+
+    // 面向对象
+    // 例子：
+    // let emp = {
+    //   sname: 'lilei',
+    //   sage: 11,
+    //   intr() {
+    //     console.log(`I'm lilei I'm 11`);
+    //   }
+    // }
+    // console.log(emp.sname,emp.intr())
+    
+    
+    // let  arr = [1,2,3,4,5];
+    // console.log(arr);
+    // arr.reverse();
+    // console.log(arr);
+
+
+      // 创建构造函数
+      // function Emp(ename,epwd,intrSelf) {//重复创建多个相同类型的对象.构造函数不能够简写成匿名函数自定义的方式，因为需要反复重复创建对象，若只创建一次之后就释放，直接写匿名函数。
+      //     this.ename = ename;
+      //     this.epwd = epwd;
+      //     this.intrSelf = (function() {
+      //       console.log(this.ename+" ..... "+this.epwd);
+      //     })();
+      // }
+      // let lilei = new Emp('lilei','123456',1);
+      // console.log(lilei.intrSelf());
+      // let hmm = new Emp('hmm','123456',2);
+      // console.log(hmm.intrSelf());
+
+        // 构造函数基础写法（默认属性和方法放到一起，但是浪费内存空间。会重复创建多个函数副本。解决：继承-》可以重复使用，节省内存空间。把所有子对象公用的方法都放到原型对象中）
+        // function Emp(ename,eage) {
+        //   this.ename = ename;
+        //   this.eage = eage;
+        // }
+        // Emp.prototype.intrSelf = function () {
+        //   console.log(`我叫${this.ename}今年${this.eage}岁`);
+        // }
+        // 创建子对象：
+        // let lilei = new Emp('Li Lei',24);
+        // let hmm = new Emp('Han Meimei',27);
+        // console.log(lilei,hmm);
+        // console.log(Emp.prototype);
+        // console.log(lilei.__proto__);
+        // console.log(hmm.__proto__);
+        // console.log(lilei.__proto__==hmm.__proto__);
+        // console.log(lilei.__proto__===hmm.__proto__);
+
+          // 构造函数（通过定义class一种类型.这种方法与原来的写法本质相同，区别在于换了一个瓶子而已）
+        //   class Emp {//定义一种类型保存这一种类型对象的构造函数和原型对象
+        //     constructor(ename,eage) {//构造函数（所有的构造函数都叫做constructor）
+        //       this.ename = ename;
+        //       this.eage = eage;
+        //     }
+
+        //     //原型对象（省略constructor.prototype前缀和省略=function相当于是ES6中对{}结构的对象的结构上的简写）
+        //     intrSelf() {
+        //       console.log(`我叫${this.ename}今年${this.eage}岁`);
+        //     }
+        //   }
+
+        // let lilei = new Emp('Li Lei',24);
+        // let hmm = new Emp('Han Meimei',27);
+        // console.log(lilei,hmm);
+        // console.log(Emp.prototype);
+        // console.log(lilei.__proto__);
+        // console.log(hmm.__proto__);
+        // console.log(lilei.__proto__==hmm.__proto__);
+        // console.log(lilei.__proto__===hmm.__proto__);
+
+
+        //希望任意一个数组调用sum（）函数，就可以求和
+        // Array.prototype.sum = function () {//给数组家的原型对象中手动添加一个sum求和函数
+        // let totle = 0;
+        // for(let i = 1;i <= this.length;i++) {
+        //       totle+=i;
+        //     }
+        //     return totle;
+        // this.map(elem=>totle+=elem);
+        // return totle;
+        }  
+        // let arr = [1,2,3,4,5];
+        // console.log(arr.sum());
+        // console.log(Array.prototype);
+
+
+        // 简单克隆一个对象
+        // let lilei  = {
+        //   ename: 'li Lei',
+        //   eage: 21
+        // }
+        // function clone(old){
+        //   //先创建一个空对象，准备接收新的属性和属性值
+        //   var newOld= {};
+        //   for(let key in old) {
+        //     //遍历旧的对象中的每个属性
+        //     newOld[key] = old[key];
+        //     // console.log(newOld[key]);
+        //   }
+        //   return newOld;
+        // }
+        // let hmm = clone(lilei);
+        // console.log(hmm);
+        // console.log(clone(lilei));
+        // console.log(hmm == lilei);
+
+       
+        
+
+        
+
+
+
+
+
+  </script>
+ 
+  </body>
+</html>
