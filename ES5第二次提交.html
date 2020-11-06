@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <script>
+      // 一.ES5数组中新增的API
+        //1.api_every()判断函数之一
+        //let arr = [1,2,3,4,5];
+        //let arr2 = [2,4,6,4,2];
+        // let res1 = arr.every(elem => elem%2==0);//判断数组中全是偶数
+        // let res2 =  arr2.every(elem => elem%2==0);
+        // console.log(res1,res2)//false true
+        // 复习：箭头函数可以简写的两种使用规则：
+        // 01-想要让内部函数和外部函数中的this指向相同的时候
+        // 02-不涉及到this指向的问题的时候，都可以简写
+    
+        //2.api_some()判断函数之一
+        // let str = arr.some(elem => elem%2!==0);//判断数组中是否包含基数
+        // let str1 = arr2.some(elem => elem%2!==0);//判断数组中是否包含基数
+        // console.log(str,str1);//true false
+   
+        //3.api_forEach()遍历函数之一(不需要return来返回值)
+        // arr.forEach(elem => console.log(`${elem}——到`))
+        // arr2.forEach(elem => console.log(`${elem}——到`))
+
+        //4.api_map()遍历函数之一（操作的是数组的副本，返回的一个新值）//注意：数组是可变类型，可以直接操作原数组，但是有例外：toString()/join()/concat()/slice()/map()/filter()
+        // map()这个api返回的新值是按照下标在原数组中的位置对应着放入新数组中的。而filter()函数中过滤出来的新值不是按照下标位置放入的。
+        // let res = arr.map(elem => elem*2)
+        // console.log(res,arr);
+      
+
+        // 5.api_filter()过滤(数组的这个api过滤出来的元素是按照下标放入新数组中的，而是相当于push()的方法在末尾追加进去的)
+        //要实现：过滤出arr数组中的偶数
+      //  let arr3 =  arr.filter(elem => elem%2==0)
+      //  console.log(arr3);// [2, 4]
+
+      // 6.api_reduce汇总(①返回的是一个结果值，注意要想执行汇总的话，程序中一定要加上return才能将每次累加之后的新的临时汇总值返回到prev临时汇总值/盒子中，才能执行下一次的累加。这就是汇总和显示圣生活中的区别，现实中汇总会自动的累加，每次累加之后的新的汇总值自定的就会保存到临时汇总值/盒子中，但是程序和现实生活中是有差别的，程序就不会自动的累加之后把新的汇总的值再返回到盒子中，要想返回到盒子中，就必须在汇总的时候添加return，才能然每次执行汇总之后的新值返回到盒子中②reduce有两个参数，注意第二个参数不写时默认是数字0。但是将来的第二个参数不一定就是0，也可能是别的数字和一个非数字当做参数。所以第二个参数不管是不是0最好都写上)
+      // let res = arr.reduce((prev,elem) =>  prev+=elem,0);//箭头函数中单行的一句代码可以省略{}和return ,虽然没有写return 但是也是写着的。恢复到普通函数就能看到了。一行语句时return和{}要有都有
+      // console.log(res);
+
+    </script>
+</body>
+</html>
