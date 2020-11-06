@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 保护对象 -->
+  <script>
+    //     function Student(ename,eage) {
+    //       this.ename = ename;
+    //       this.eage = eage;
+    //  }
+    //   let father = {
+    //    car: Infinity,
+    //    money: '10000000000000000'
+    //  }
+    //设置所有的父对象为同一的父对象时，修改构造函数.prototype = 新对象
+    //  Student.prototype = father;
+    //   let lilei = new Student('Li Lei',27);
+    //   let hmm = new Student('Han Meimei',27);
+    //  console.log(lilei,hmm);
+    // function car(cid,phone) {
+    //   this.cid = cid;
+    //   this.phone = phone;
+    // }
+    //  设置一个自对象的父对象：
+    // Object.setPrototypeOf(lilei,car);
+    // console.log(lilei);
+    
+    
+    // 2.所有的对象（包含函数）一定要有变量来接着，不接，没有返回值和执行完一次对象之后就自动释放该对象的地址
+    // 'use strict'
+    // let str = 'abc';
+    // str.money = 10;//自动创建包装对象new String(str),给对象一个属性值money = 10; 但是这个对象没有外部的变量接着，所以给对象添加了一个新属性之后没有人用，这个新添加的新属性就会自动释放。
+    // console.log(str.money);//当想要获取对象中的属性的时候，因为对象已经被释放了，所以报错//非严格模式下：undefined。严格模式下：35行报错
+    
+    // a =  10;//严格模式特点-1：禁止给未声明的变量赋值
+    // console.log(a);//a is not defined
+    
+    // 特点2-：静默失败升级为错误（只能将多数的升级为失败,还有少数是不能升级的）
+    
+    // ES5:1-严格模式（4种） 2-保护对象（属性/自定义属性/结构）
+    // 4种：1.禁止给未声明的变量赋值
+    //      2.静默失败升级为错误（多数）
+    //      3.fun() 和(fun(){})中的this指向不是window，而是undefined
+    //      4.禁止使用arguments.callee()关键字使用递归在函数内部代替函数名（递归都用for循环）
+    
+    // 递归实现斐波那契数列
+    // // 1 1 3 5 8 13 21...
+    // function f(n) {
+    //   let fn =  arguments.callee;//没有(),不是方法，是关键字
+    //   // 'use strict' //注意不能加严格模式，禁用
+    //   if(n<3) {
+    //     return 1;
+    //   }else {
+    //     return fn(n-1)+fn(n-2);
+    //   }
+    // }
+    // console.log(f(10));
+    
+    // 'use strict'
+    // for循环实现斐波那契数列
+    // 1 1 3 5 8 13 21...
+    // (function () {
+    //   let n1 = 1,n2 = 1;  
+    //   for (let i = 3; i >=3;i++) {  
+        
+    //   }
+    // })();
+    
+    // function Parent(ename,eid,salary) {
+    //   this.ename = ename;
+    //   this.eid = eid;//this->undefined
+    //   this.salary = salary;
+    // }
+    // let lilei = new Parent('li lei',12);
+    // console.log(lilei);
+    
+    // 保护一个对象的多个属性小对象
+    
+    // let lilei = new Parent('lilei',1001,9000);
+    // let lilei = {
+    //   ename: 'lilei',
+    //   eage: 24,
+    //   salary: 9000
+    // }
+    // 'use strict'
+    // class Emp {
+    //   constructor(eid,ename,eage,salary) {
+    //      Object.defineProperties(this,{//使用这种方式给构造函数添加属性，默认添加构造函数中没有存在的属性时，这个属性
+            
+    //      }) 
+    //   }
+    // }
+    // Object.defineProperties(lilei,{
+    //   // 访问器属性设置eage：自定义的属性值（要求eage在18-50之间）
+    //     $_eage: {//隐姓埋名半隐藏
+    //       value: lilei.eage,
+    //       writable: true
+    //     },
+    //     eage: {
+    //       get() {
+    //         return this.$_eage
+    //       },
+    //       set(value) {
+    //         return value>=18&&value<=50?this.$_eage=value:Error('年龄不在范围内');
+    //       },
+    //       configurable: false
+    //     }
+    // })
+    // console.log(lilei);
+    // console.log(lilei.eage);
+    // lilei.eage = 45;
+    // console.log(lilei.eage);
+    // lilei.eid = 1002;
+    // lilei.salary = 4000;
+    // delete lilei.ename;
+    // console.log(lilei.eid);
+    // console.log(lilei.salary);
+    // console.log(lilei);
+    
+    
+    
+    //保护对象的结构
+    // 'use strict'
+    // let lilei = {
+    //   eid: 1001,
+    //   ename: 'li lei'
+    // }
+    // 1-防止添加属性
+    //Object.preventExtensions(lilei);
+    //lilei.salary = 5000;
+    //console.log(lilei);//报错：Cannot add property salary, object is not extensible 
+    
+    // 2-防止添加和删除属性
+    //Object.seal(lilei);
+    // lilei.salary = 5000;//Cannot add property salary, object is not extensible
+    //delete lilei.eid;//Cannot delete property 'eid' of #<Object>
+    // console.log(lilei);
+    
+    // 3-冻结
+    //Object.freeze(lilei);
+    //防止给对象添加属性和删除属性及其不能修改其中的属性值
+    //尝试添加属性
+    // lilei.salary = 9000;//Cannot add property salary, object is not extensible
+    // 尝试删除属性
+    // delete lilei.eid;//Cannot delete property 'eid' of #<Object>
+    // 尝试修改属性值
+    // lilei.eid = 1002;//Cannot assign to read only property 'eid' of object '#<Object>'
+    // console.log(lilei); 
+    // 包装对象：自己不使用，自动使用。
+    //什么时候使用：当试图窜改一个原始类型的数据的属性和方法的时候，自动创建包装对象（new String/Number/Boolean）
+    // 注意：所有的对象（除了函数中的匿名函数的自调用->只能执行一次后就释放了）都有释放的可能性（取决于这个对象的地址有没有外部变量来引用着，没有：执行之后自动释放。有：循环使用）
+  </script>
+
+  <!-- 保护对象-像java一样的构造函数 -->
+  <script>
+    'use strict'
+    //实现像java一样的构造函数
+    function Emp(ename,salary,eage) {
+      //不能使用原本在构造函数中创建属性的方式，因为那样添加的属性是没有保护/免疫力的.所以孩子在没有出生之前，在妈妈肚子里时就给所有的孩子（构造函数中的this在创建子对象时自动指向new创建的新对象）都添加免疫力
+      Object.defineProperties(this,{
+        ename: {
+          value: ename,
+          writable: true,
+          enumerable: true
+        },
+        salary: {
+          value: salary,
+          writable: true,
+          enumerable: false
+        },
+        //隐姓埋名半隐藏
+        _eage: {
+          value: eage,//暂时将用户写的原始的值不通过任何的验证传进来
+          writable: true,
+          enumerable: false,
+        },
+        eage: {//访问器属性，自己不保存值，保护另一个属性
+          get: function() {
+            return this._eage;
+          },
+          set: function(value) {//这里没有return，因为不需要向修改值，像隐藏的属性传递用户想要修改并符合年龄段的eage的值
+          console.log(value);
+            if (value>=18 && value<= 60) {
+              this._eage = value;
+            }else {
+              Error(`年龄不符合要求`);
+            }
+            //value>=18 && value<= 60?this._eage = value:`eage年龄不符合要求`;
+          },
+        configurable: false,
+        enumerable: true
+        }
+      })
+      Object.seal(this);
+    }
+    var lilei = new Emp('lilei',5000,24);
+    //尝试添加eid属性
+    // lilei.eid = 1001;
+    // 尝试删除lilei的salary
+    // delete lilei.salary;
+    // 尝试修改李磊的eage属性
+    lilei.eage =10000;
+    console.log(lilei);
+  </script>
+
+<!-- 永久替换函数中的this为指定的对象 -->
+  <script>
+  function sum(base,bon1,bon2) {
+    return base+bon1+bon2;
+  }
+
+  var father = {
+    ename: 'li Lei',
+    eage: 21
+  }
+  //基于father对象创建两个子对象
+  let hmm = Object.create(father);
+  let lilei = Object.create(father);
+  // 给father对象永久绑定一个sum函数副本
+  var newSum = sum.bind(father,10000);
+  // console.log(father); father里面并没有看到这个函数？问题：问什么永久绑定了之后看不到这个函数副本
+  // 让基于father对象创建所有的子对象都可以使用father中的newSum函数副本
+   console.log(newSum(2000,3000));//孩子通过继承使用爸爸中的函数时，为什么前面不能加孩子的对象名？加了报错:hmm.newSum is not a function
+  console.log(hmm.newSum(2000,10000));      
+  //现在想要为father对象下的所有的子对象都永久绑定一个sum函数
+  //  console.log(sum.apply(lilei,[10000,2000,3000]));
+  //  console.log(sum.call(lilei,10000,2000,3000));
+  // var onlySum = sum.bind(lilei,10000);
+  //  console.log(onlySum(1000,5000));//永久给lilei绑定求和函数->怎样给任意一个对象绑定永久替换的函数呢？
+  // Object.prototype.sum = function(base,bon1,bon2) {
+  //      let newSum =  sum.bind(this,base,bon1,bon2);
+  // }
+
+    // 总结：******
+    //bind()函数只能在两个对象和函数“***完全没有父子关系的情况下使用***”，使用bind()函数可以让这两个完全没有任何关系的对象和函数互相使用
+    //若这两个有关系的情况下，就不使用bind() 函数了，因为已经有关系了，就可以直接把方法写到父对象中就可以让这个父对象下的所有的子对象都可以永久的使用这个函数了
+    // lilei.sum()
+
+  </script>
+</body>
+</html>
